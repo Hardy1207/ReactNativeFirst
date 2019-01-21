@@ -15,10 +15,12 @@ mongoose.connect("mongodb://localhost:27017/TaskDB", { useNewUrlParser: true });
 var conn = mongoose.connection;
 
 const User = mongoose.model("Users", userScheme);
-const user = new User({
+const user = new User(
+    {
     name: "Chuck",
     age: 41
-});
+    }
+);
   
  user.save(function(err){
     // mongoose.disconnect();  // отключение от базы данных
@@ -41,9 +43,48 @@ app.get('/api/users/get', function (req, res) {
 });
 
 app.post('/api/users/create', function (req, res) {
-   console.log(req.body);
+   const createUser = new User(
+        {
+        name: req.body.name,
+        age: req.body.age
+        }
+    );
+    createUser.save(function(err){      
+    if(err) return console.log(err);
+    }); 
    res.json(req.body);
 });
+
+app.delete('/api/users/delete/:id', function (req, res) {
+    console.log("delete");
+    console.log(req.params.id);
+    User.deleteOne({ _id: req.params.id }, function(err) {
+        if (!err) {
+            console.log("good work Pasha");
+        }
+        else {
+            console.log("error");
+        }
+    });
+    res.json(req.body);
+ });
+
+ app.patch('/api/users/update/:id', function (req, res) {
+        var obj = req.body;
+        var id = obj._id;
+        console.log(id);
+        if (id) {
+        User.update({_id: id}, obj, {upsert: true}, function (err,doc) {
+            if(err) return handleError(err);
+            else
+            {
+                console.log(doc);
+                res.json(doc);
+            }
+            })    
+        }}
+    );
+
 
 app.listen(3001, function () {
   console.log('Example app listening on port 3001!');

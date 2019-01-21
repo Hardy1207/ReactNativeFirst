@@ -12,5 +12,13 @@ export const httpPost = (
     url,
     body
 ) => {
-    return axios.post(!url.startsWith("http") ? proxyURL + url : url, { body })
+    return axios.post(!url.startsWith("http") ? proxyURL + url : url,  body )
 }
+
+export const httpDelete = (
+    url, 
+    body
+) => {
+    return axios.delete(!url.startsWith("http") ? proxyURL + url : url, body);
+}
+  
