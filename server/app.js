@@ -10,25 +10,33 @@ const userScheme = new Schema({
   
 // подключение
 mongoose.connect("mongodb://localhost:27017/TaskDB", { useNewUrlParser: true });
-  
-const User = mongoose.model("User", userScheme);
+
+var conn = mongoose.connection;
+
+const User = mongoose.model("Users", userScheme);
 const user = new User({
-    name: "Bill",
+    name: "Chuck",
     age: 41
 });
   
-user.save(function(err){
-    mongoose.disconnect();  // отключение от базы данных
+ user.save(function(err){
+    // mongoose.disconnect();  // отключение от базы данных
       
     if(err) return console.log(err);
     console.log("Сохранен объект", user);
-});
+}); 
 var app = express();
-
-app.get('/', function (req, res) {
-  res.send('Hello World!');
+app.get('/api/get', function (req, res) {
+    User.findOne({ name: 'Chuck' }, function(err, doc){
+        if(err) return handleError(err);
+        else
+        {
+            res.json(doc);
+        }
+        })
+    // res.send(user);
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(3001, function () {
+  console.log('Example app listening on port 3001!');
 });
