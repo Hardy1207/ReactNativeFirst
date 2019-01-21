@@ -8,9 +8,9 @@ export const httpGet = (
     return axios.get(!url.startsWith("http") ? proxyURL + url : url);
 };
 
-/* export const httpPost = (
+export const httpPost = (
     url,
     body
 ) => {
-
-} */
+    return axios.post(!url.startsWith("http") ? proxyURL + url : url, { body })
+}

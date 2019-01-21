@@ -1,11 +1,12 @@
-import { httpGet } from '../../requestApi';
+import { httpGet, httpPost } from '../../requestApi';
 
 export async function getPerson(){
-    return await httpGet("/get");
+    return await httpGet("/users/get");
 }
 
-// export async function createPerson(){
-//     return await httpPost("/get");
-// }
+export async function createPerson(person){
+    console.log(person);
+    return await httpPost("/users/create", person);
+}
 
 

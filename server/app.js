@@ -1,4 +1,5 @@
 var express =require('express');
+const bodyParser =require("body-parser");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
   
@@ -23,10 +24,13 @@ const user = new User({
     // mongoose.disconnect();  // отключение от базы данных
       
     if(err) return console.log(err);
-    console.log("Сохранен объект", user);
 }); 
 var app = express();
-app.get('/api/get', function (req, res) {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.get('/api/users/get', function (req, res) {
     User.findOne({ name: 'Chuck' }, function(err, doc){
         if(err) return handleError(err);
         else
@@ -34,7 +38,11 @@ app.get('/api/get', function (req, res) {
             res.json(doc);
         }
         })
-    // res.send(user);
+});
+
+app.post('/api/users/create', function (req, res) {
+   console.log(req.body);
+   res.json(req.body);
 });
 
 app.listen(3001, function () {
