@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     },
     cancel_button: {
       height: 'auto',
+      backgroundColor: '#A9A9A9',
       textAlign:'center',
       justifyContent: 'center',
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { getPerson, createPerson }  from '../../core/modules/person/personApi';
 import { Actions } from 'react-native-router-flux';
-import { Container, List, ListItem, Button , Text, Icon, Header, Footer} from 'native-base';
+import { StyleSheet, FlatList , TouchableHighlight} from 'react-native';
+import { Container, List, ListItem, Button , Text, Icon, Header, Footer, View} from 'native-base';
 
 
 export default class PersonList extends React.Component {
@@ -28,26 +29,32 @@ export default class PersonList extends React.Component {
     render() {
         return(
             <Container>
-            <Button onPress={this.addNewPerson}>
-                        <Text>
-                            Add new person
-                        </Text>
-                    </Button>
-                    <List>
-                        {
-                            this.state.persons.map( person => 
-                                <ListItem key={person._id} button onPress={Actions.edit} >
-                                    <Text>
-                                        {person.name}
-                                    </Text>
-                                 </ListItem>
-                            )
+            <Header>
+                <Button onPress={this.addNewPerson}>
+                    <Text>
+                        Add new person
+                    </Text>
+                </Button>
+            </Header>
+                    <FlatList style={styles.personList}
+                        data={this.state.persons}
+                        renderItem={({item, index}) =>
+                        <TouchableHighlight onPress={Actions.edit}>
+                            <View style={[styles.person_listItemEven, 
+                            { backgroundColor: this.checkIndexIsEven(index) ? '#FFFAF0' : '#F5F5F5'}]}>
+                                <Text >{item.name}</Text>
+                                <Text >{item.age}</Text>
+                            </View>
+                        </TouchableHighlight>
                         }
-                    </List>
+                    />
             </Container>
         )
     }
 
+    checkIndexIsEven (n) {
+        return n % 2 == 0;
+    }
 
     addNewPerson = (e) => {
         e.preventDefault();
@@ -68,3 +75,13 @@ export default class PersonList extends React.Component {
         })
     }
 }
+
+const styles = StyleSheet.create({
+    personList: {
+    },
+    person_listItemEven: {
+        borderWidth: 1,
+        borderColor: '#696969',
+        padding: '5%',    
+   },
+  });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PersonList from '../components/PersonList';
-import { Container ,  Button , Text} from 'native-base';
+import { Container ,  Button , Text, FlatList} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 export class SettingScreen extends Component {
