@@ -7,13 +7,14 @@ export class SettingScreen extends Component {
   render() {
     return (
       <Container>
+        <PersonList/>
         <Text>This is the Settings screen</Text>
         <Button onPress={Actions.home}> 
           <Text>
             Click
           </Text>
         </Button>
-        <PersonList/>
+      
       </Container>
     )
   }

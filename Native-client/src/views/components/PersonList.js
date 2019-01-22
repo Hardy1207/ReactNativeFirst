@@ -2,7 +2,7 @@ import React from 'react';
 import { getPerson, createPerson }  from '../../core/modules/person/personApi';
 import { Actions } from 'react-native-router-flux';
 import { StyleSheet, FlatList , TouchableHighlight} from 'react-native';
-import { Container, List, ListItem, Button , Text, Icon, Header, Footer, View} from 'native-base';
+import { Container, List, ListItem, Button , Text, Icon, Header, Footer, View, Right} from 'native-base';
 
 
 export default class PersonList extends React.Component {
@@ -29,8 +29,8 @@ export default class PersonList extends React.Component {
     render() {
         return(
             <Container>
-            <Header>
-                <Button onPress={this.addNewPerson}>
+            <Header >
+                <Button style={styles.button_add_new_person} onPress={this.addNewPerson}>
                     <Text>
                         Add new person
                     </Text>
@@ -40,7 +40,7 @@ export default class PersonList extends React.Component {
                         data={this.state.persons}
                         renderItem={({item, index}) =>
                         <TouchableHighlight onPress={Actions.edit}>
-                            <View style={[styles.person_listItemEven, 
+                            <View key={item._id} style={[styles.person_listItemEven, 
                             { backgroundColor: this.checkIndexIsEven(index) ? '#FFFAF0' : '#F5F5F5'}]}>
                                 <Text >{item.name}</Text>
                                 <Text >{item.age}</Text>
@@ -84,4 +84,7 @@ const styles = StyleSheet.create({
         borderColor: '#696969',
         padding: '5%',    
    },
+   button_add_new_person: {
+    justifyContent: "flex-end",
+   }
   });
