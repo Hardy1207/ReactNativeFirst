@@ -14,42 +14,48 @@ export class EditScreen extends Component {
               <Input placeholder="Age" />
             </Item>
         </Form>
-        <View style={styles.view}>
-              <Button info style={styles.accept_button}>
-                  <Text style={styles.button_text}> 
-                      Save
-                  </Text>
-              </Button>
-              <Button info style={styles.cancel_button}>
-                  <Text style={styles.button_text}>
-                      Cancel
-                  </Text>
-              </Button>
-          </View>
+          <View style={styles.button_group}>
+                <Button info style={styles.accept_button}>
+                    <Text style={styles.button_text}> 
+                        Save
+                    </Text>
+                </Button>
+                <Button info style={styles.cancel_button}>
+                    <Text  style={styles.button_text}>
+                        Cancel
+                    </Text>
+                </Button>
+            </View>
       </Container>
     )
   }
 };
 
 const styles = StyleSheet.create({
-    view: {
+    container: {
+      paddingTop: '40%',
+      paddingRight: '10%',
+      paddingLeft: '10%',
+    },
+    button_group: {
         marginTop: '5%',
         flexDirection: 'row',
-        alignSelf: 'flex-start', 
       },
     accept_button: {
-      flexDirection: 'row',
-      width: '60%',
+      width: '50%',
       marginRight: '5%',
-      alignSelf: 'flex-start', 
+      textAlign:'center',
+      justifyContent: 'center',
     },
     cancel_button: {
-      color: 'red',
-      flexDirection: 'row',
-      alignSelf: 'flex-start', 
+      height: 'auto',
+      textAlign:'center',
+      justifyContent: 'center',
+
     },
     button_text: {
-      textAlign: 'center',
+      fontWeight:'bold',
+      color:'#fff'
     }
   });
 
