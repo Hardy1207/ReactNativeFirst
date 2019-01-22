@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import PersonList from './PersonList';
+import { Container ,  Button , Text} from 'native-base';
 
 export class Settings extends Component {
   render() {
     return (
-      <View>
+      <Container>
         <Text>This is the Settings screen</Text>
         <Button onPress={() => this.props.navigation.navigate('HomeScreen')} title="Home"/>
-      </View>
+        <PersonList/>
+      </Container>
     )
   }
 };

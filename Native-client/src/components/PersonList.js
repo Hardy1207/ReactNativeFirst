@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { getPerson, createPerson }  from '../core/modules/person/personApi'
-import { Container, List, ListItem, Button , Text} from 'native-base';
+import { Container, List, ListItem, Button , Text, Icon, Header, Footer} from 'native-base';
 
 
 export default class PersonList extends React.Component {
@@ -28,26 +28,30 @@ export default class PersonList extends React.Component {
     render() {
         return(
             <Container>
-                    <Text>
-                        {this.state.persons.name}
-                    </Text>
-                    <Button onPress={this.addNewPerson}>
+            <Header>
+                <Text> Test Header </Text>
+            </Header>
+            <Button onPress={this.addNewPerson}>
                         <Text>
-                            Add new Person
+                            Add new person
                         </Text>
                     </Button>
-
-                 {/*    <List>
-                            {
-                                this.state.persons.map( person => 
-                                    <ListItem key={person.id} >
-                                        <Text>
-                                            {person.name}
-                                        </Text>
-                                     </ListItem>
-                                )
-                            }
-                    </List> */}
+                    <List>
+                        {
+                            this.state.persons.map( person => 
+                                <ListItem key={person._id} button onPress={() => this.props.navigation.navigate('EditScreen')} >
+                                    <Text>
+                                        {person.name}
+                                    </Text>
+                                 </ListItem>
+                            )
+                        }
+                    </List>
+                <Footer>
+                    <Text>
+                        Test 2
+                    </Text>
+                </Footer>
             </Container>
         )
     }
@@ -62,6 +66,13 @@ export default class PersonList extends React.Component {
         createPerson(newUser).then( res => {
             console.log(" all good");
             console.log(res);
+        })
+        getPerson().then( res => {
+            console.log(" all good");
+            console.log(res);
+            this.setState({
+                persons: res.data
+            }) 
         })
     }
 }

@@ -33,10 +33,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.get('/api/users/get', function (req, res) {
-    User.findOne({ name: 'Chuck' }, function(err, doc){
+    User.find({}, function(err, doc){
         if(err) return handleError(err);
         else
         {
+            console.log(doc);
             res.json(doc);
         }
         })
@@ -49,10 +50,14 @@ app.post('/api/users/create', function (req, res) {
         age: req.body.age
         }
     );
-    createUser.save(function(err){      
+    createUser.save(function(err, newUser){      
     if(err) return console.log(err);
+    else {
+        console.log(newUser._id);
+        res.json(newUser);
+    }
     }); 
-   res.json(req.body);
+   
 });
 
 app.delete('/api/users/delete/:id', function (req, res) {

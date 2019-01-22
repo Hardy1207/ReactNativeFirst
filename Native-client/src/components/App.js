@@ -8,11 +8,14 @@ import {
 import { createStackNavigator } from 'react-navigation';
 import Settings from './Settings';
 import Home from './Home';
-import PersonList from './PersonList';
 import { Container } from 'native-base';
+import PersonList from './PersonList';
+import { EditScreen } from './EditScreen';
 const AppNavigator = createStackNavigator({
-  SettingScreen: { screen: Settings },
-  HomeScreen: { screen: Home }
+  SettingScreen: { screen: Settings},
+  HomeScreen: { screen: Home},
+  SettingScreen: {screen: PersonList},
+  EditScreen: { screen: EditScreen}
 });
 
 export default class App extends Component {
@@ -20,7 +23,6 @@ export default class App extends Component {
     return (
       <Container>
         <AppNavigator />
-        <PersonList/>
       </Container>
     );
   }
