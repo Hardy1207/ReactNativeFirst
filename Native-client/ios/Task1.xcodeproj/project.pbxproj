@@ -37,11 +37,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* Task1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* Task1Tests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		381B8A05A1CF43B1BF658277 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 377E549A69AF4AFCBBC6009B /* libRNGestureHandler.a */; };
-		79A561B2BEE6491795E7E099 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5C675B19C04D3EBCAEA2E2 /* Roboto_medium.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		DECE5B7FB0AE46418835B9F0 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E930916CA59443B082877D21 /* rubicon-icon-font.ttf */; };
-		F18827CD58AE4F13986CF8C4 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D95ED3F7CB340C2BBEB9F88 /* Roboto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1122,9 +1119,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				79A561B2BEE6491795E7E099 /* Roboto_medium.ttf in Resources */,
-				F18827CD58AE4F13986CF8C4 /* Roboto.ttf in Resources */,
-				DECE5B7FB0AE46418835B9F0 /* rubicon-icon-font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,7 +1293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -1323,7 +1317,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				"DEAD_CODE_STRIPPING[arch=*]" = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
