@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View,StyleSheet } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Container, Header, Title,Text , Button, Left, Right, Body, Icon } from 'native-base';
 
-export class Home extends Component {
+export class HomeScreen extends Component {
   render() {
     return (
       <Container>
@@ -22,7 +23,7 @@ export class Home extends Component {
           }} >
           <Text>Fetch Check console!</Text>
         </Button>
-        <Button style={styles.button} onPress={() => this.props.navigation.navigate('SettingScreen')} >
+        <Button style={styles.button} onPress={Actions.settings} >
           <Text>Click Me!</Text>
         </Button>
         </Container>
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home
+export default HomeScreen

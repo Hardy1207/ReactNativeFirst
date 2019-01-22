@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-import { getPerson, createPerson }  from '../core/modules/person/personApi'
+import { getPerson, createPerson }  from '../../core/modules/person/personApi';
+import { Actions } from 'react-native-router-flux';
 import { Container, List, ListItem, Button , Text, Icon, Header, Footer} from 'native-base';
 
 
@@ -28,9 +28,6 @@ export default class PersonList extends React.Component {
     render() {
         return(
             <Container>
-            <Header>
-                <Text> Test Header </Text>
-            </Header>
             <Button onPress={this.addNewPerson}>
                         <Text>
                             Add new person
@@ -39,7 +36,7 @@ export default class PersonList extends React.Component {
                     <List>
                         {
                             this.state.persons.map( person => 
-                                <ListItem key={person._id} button onPress={() => this.props.navigation.navigate('EditScreen')} >
+                                <ListItem key={person._id} button onPress={Actions.edit} >
                                     <Text>
                                         {person.name}
                                     </Text>
@@ -47,11 +44,6 @@ export default class PersonList extends React.Component {
                             )
                         }
                     </List>
-                <Footer>
-                    <Text>
-                        Test 2
-                    </Text>
-                </Footer>
             </Container>
         )
     }

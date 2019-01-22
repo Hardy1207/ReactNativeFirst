@@ -18,6 +18,7 @@ export class EditScreen extends Component {
       </Container>
     )
   }
+  
 };
 
 export default EditScreen;
