@@ -1,7 +1,7 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { getPersonList } from '../../actions/person-actions'
+import { getPersonList, createNewPerson } from '../../actions/person-actions'
 import { StyleSheet, FlatList , TouchableHighlight} from 'react-native';
 import { Container,Button , Text, Icon, Header, View } from 'native-base';
 
@@ -45,25 +45,11 @@ class PersonList extends React.Component {
     }
 
 
- /*  addNewPerson = (e) => {
-        console.log(this.props.personList);
-        e.preventDefault();
-        const newUser = {
-            name: "New Person",
-            age: 41
-        };
-        createPerson(newUser).then( res => {
-            console.log(" all good");
-            console.log(res);
-        })
-        getPerson().then( res => {
-            console.log(" all good");
-            console.log(res);
-            this.setState({
-                persons: res.data
-            }) 
-        }) 
-    }  */
+  addNewPerson = (e) => {
+        console.log(this.props.personList)
+       /*  e.preventDefault();
+        this.props.createNewPerson(); */
+    }  
 }
 
 
@@ -75,7 +61,8 @@ const mapStateToProps = state => {
 
 
 const mapActionsToProps = {
-    onGetPersonList : getPersonList
+    onGetPersonList : getPersonList,
+    onCreateNewPerson: createNewPerson,
 };
 
 
