@@ -1,43 +1,30 @@
 import React from 'react';
-import { getPerson, createPerson }  from '../../core/modules/person/personApi';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { getPersonList } from '../../actions/person-actions'
 import { StyleSheet, FlatList , TouchableHighlight} from 'react-native';
-import { Container, List, ListItem, Button , Text, Icon, Header, Footer, View, Right} from 'native-base';
+import { Container,Button , Text, Icon, Header, View } from 'native-base';
 
 
-export default class PersonList extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            persons: []
-        }
-    }
-
-
+class PersonList extends React.Component {
     componentDidMount() {
-        getPerson().then( res => {
-            console.log(" all good");
-            console.log(res);
-            this.setState({
-                persons: res.data
-            }) 
-        })
-        console.log("after axios");
+        this.props.onGetPersonList();
     }
 
 
     render() {
+        console.log(this.props.personList);
         return(
             <Container>
             <Header >
                 <Button style={styles.button_add_new_person} onPress={this.addNewPerson}>
                     <Text>
-                        Add new person
+                        Add New Person
                     </Text>
                 </Button>
             </Header>
-                    <FlatList style={styles.personList}
-                        data={this.state.persons}
+                    <FlatList style={styles.personFlatList}
+                        data={this.props.personList}
                         renderItem={({item, index}) =>
                         <TouchableHighlight onPress={Actions.edit}>
                             <View key={item._id} style={[styles.person_listItemEven, 
@@ -52,11 +39,14 @@ export default class PersonList extends React.Component {
         )
     }
 
+
     checkIndexIsEven (n) {
         return n % 2 == 0;
     }
 
-    addNewPerson = (e) => {
+
+ /*  addNewPerson = (e) => {
+        console.log(this.props.personList);
         e.preventDefault();
         const newUser = {
             name: "New Person",
@@ -72,12 +62,27 @@ export default class PersonList extends React.Component {
             this.setState({
                 persons: res.data
             }) 
-        })
-    }
+        }) 
+    }  */
 }
 
+
+const mapStateToProps = state => {
+    return { 
+        personList : state.personList
+    }
+};
+
+
+const mapActionsToProps = {
+    onGetPersonList : getPersonList
+};
+
+
+export default connect(mapStateToProps, mapActionsToProps)(PersonList);
+
 const styles = StyleSheet.create({
-    personList: {
+    personFlatList: {
     },
     person_listItemEven: {
         borderWidth: 1,
