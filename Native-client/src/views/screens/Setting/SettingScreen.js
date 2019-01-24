@@ -4,7 +4,7 @@ import React from 'react';
 import {
   Container, Button, Text,
 } from 'native-base';
-import PersonList from '../../components/PersonList';
+import PersonList from '../../components/personList/PersonList';
 import { HomeScreenType } from '../screenTypes';
 
 
