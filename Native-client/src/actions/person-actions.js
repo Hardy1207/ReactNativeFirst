@@ -10,16 +10,12 @@ export function uploadPersonList(newPersonList) {
   };
 }
 
-export function getPersonList() {
-  return (dispatch) => {
-    getPerson().then((res) => {
-      dispatch(uploadPersonList(res.data));
-    });
-  };
-}
+export const getPersonList = () => async (dispatch) => {
+  const response = await getPerson();
+  dispatch(uploadPersonList(response.data));
+};
 
-export function createNewPerson() {
-  return (dispatch) => {
-    createPerson().then(dispatch(getPersonList()));
-  };
-}
+export const createNewPerson = () => async (dispatch) => {
+  await createPerson();
+  dispatch(getPersonList());
+};

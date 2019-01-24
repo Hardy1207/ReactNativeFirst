@@ -1,6 +1,8 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable no-console */
+/* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -10,25 +12,22 @@ import {
 import {
   Container, Button, Text, Header, View,
 } from 'native-base';
-import {
-  getPersonList, createNewPerson,
-} from '../../actions/person-actions';
+import { getPersonList, createNewPerson } from '../../actions/person-actions';
 
 
 const styles = StyleSheet.create({
   personFlatList: {
   },
-  person_listItemEven: isEvenIndex => ({
+  personListItem: isEvenIndex => ({
     borderWidth: 1,
     borderColor: '#696969',
     backgroundColor: isEvenIndex ? '#FFFAF0' : '#F5F5F5',
     padding: '5%',
   }),
-  button_add_new_person: {
+  buttonAddNewPerson: {
     justifyContent: 'flex-end',
   },
 });
-
 const PersonList = class extends React.Component {
   mapActionsToProps = {
     onGetPersonList: getPersonList,
@@ -36,7 +35,6 @@ const PersonList = class extends React.Component {
   };
 
   componentDidMount() {
-    // const { props } = this.context;
     this.props.onGetPersonList();
   }
 
@@ -46,20 +44,27 @@ const PersonList = class extends React.Component {
     this.props.createNewPerson(); */
   }
 
-  checkIndexIsEven = () => (
-    (n) => {
-      // eslint-disable-next-line no-console
-      console.log(n);
-      // return n % 2 === 0;
-      return true;
-    });
+  checkIndexIsEven = index => {
+    console.log(index);
+    return index % 2 === 0;
+  }
+
+  renderPersonList = (item) => (
+    <TouchableHighlight onPress={Actions.edit}>
+      <View
+        style={styles.personListItem(this.checkIndexIsEven(item.index))}
+      >
+        <Text>{item.item.name}</Text>
+        <Text>{item.item.age}</Text>
+      </View>
+    </TouchableHighlight>
+  )
 
   render() {
-    // const { props } = this.context;
     return (
       <Container>
         <Header>
-          <Button style={styles.button_add_new_person} onPress={this.addNewPerson}>
+          <Button style={styles.buttonAddNewPerson} onPress={this.addNewPerson}>
             <Text>
               Add New Person
             </Text>
@@ -67,19 +72,10 @@ const PersonList = class extends React.Component {
         </Header>
         <FlatList
           style={styles.personFlatList}
+          // eslint-disable-next-line no-underscore-dangle
+          keyExtractor={(item) => item._id}
           data={this.props.personList}
-          renderItem={({ item, index }) => (
-            <TouchableHighlight onPress={Actions.edit}>
-              <View
-                // eslint-disable-next-line no-underscore-dangle
-                key={item._id}
-                style={styles.person_listItemEven(this.checkIndexIsEven(index))}
-              >
-                <Text>{item.name}</Text>
-                <Text>{item.age}</Text>
-              </View>
-            </TouchableHighlight>
-          )}
+          renderItem={this.renderPersonList}
         />
       </Container>
     );
