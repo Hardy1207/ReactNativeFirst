@@ -13,7 +13,7 @@ class SettingScreen extends React.PureComponent {
     const { navigation } = this.props;
     return (
       <Container>
-        <PersonList />
+        <PersonList navigation={navigation} />
         <Text>This is the Settings screen</Text>
         <Button onPress={() => navigation.navigate(HomeScreenType)}>
           <Text>

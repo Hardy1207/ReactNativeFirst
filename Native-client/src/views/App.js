@@ -5,7 +5,6 @@ import { createStackNavigator } from 'react-navigation';
 import SettingScreen from './screens/SettingScreen';
 import HomeScreen from './screens/HomeScreen';
 import EditScreen from './screens/EditScreen';
-import PersonList from './components/PersonList';
 import store from '../reduxStore';
 import { HomeScreenType, EditScreenType, SettingScreenType } from './screens/screenTypes';
 
@@ -25,24 +24,10 @@ const AppNavigator = createStackNavigator({
   [SettingScreenType]: {
     screen: SettingScreen,
     navigationOptions: {
-      headerTitle: 'Home',
+      headerTitle: 'Settings',
     },
   },
-  PersonList: {
-    screen: PersonList,
-  },
 });
-/* const App = () => (
-  <Provider store={store}>
-    <Router>
-      <Stack key="root">
-        <Scene key="settings" component={SettingScreen} title="Settings" />
-        <Scene key="home" component={HomeScreen} title="Home" />
-        <Scene key="edit" component={EditScreen} title="Edit" />
-      </Stack>
-    </Router>
-  </Provider>
-); */
 
 const App = () => (
   <Provider store={store}>
