@@ -1,10 +1,9 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   StyleSheet, FlatList, TouchableHighlight,
@@ -13,6 +12,7 @@ import {
   Container, Button, Text, Header, View,
 } from 'native-base';
 import { getPersonList, createNewPerson } from '../../actions/person-actions';
+import { EditScreenType } from '../screens/screenTypes';
 
 
 const styles = StyleSheet.create({
@@ -44,13 +44,10 @@ const PersonList = class extends React.Component {
     this.props.createNewPerson(); */
   }
 
-  checkIndexIsEven = index => {
-    console.log(index);
-    return index % 2 === 0;
-  }
+  checkIndexIsEven = index => index % 2 === 0;
 
-  renderPersonList = (item) => (
-    <TouchableHighlight onPress={Actions.edit}>
+  renderPersonList = item => (
+    <TouchableHighlight onPress={() => this.props.navigation.navigate(EditScreenType)}>
       <View
         style={styles.personListItem(this.checkIndexIsEven(item.index))}
       >
@@ -73,7 +70,7 @@ const PersonList = class extends React.Component {
         <FlatList
           style={styles.personFlatList}
           // eslint-disable-next-line no-underscore-dangle
-          keyExtractor={(item) => item._id}
+          keyExtractor={item => item._id}
           data={this.props.personList}
           renderItem={this.renderPersonList}
         />

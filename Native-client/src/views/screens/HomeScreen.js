@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import {
   Container, Title, Text, Button,
 } from 'native-base';
+import { SettingScreenType } from './screenTypes';
 
 
 const styles = StyleSheet.create({
@@ -28,15 +31,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeScreen = () => (
-  <Container>
-    <Title>
-      <Text>This is the home screen</Text>
-    </Title>
-    <Button style={styles.button} onPress={Actions.settings}>
-      <Text>Click Me!</Text>
-    </Button>
-  </Container>
-);
+
+class HomeScreen extends React.PureComponent {
+  render() {
+    const { navigation } = this.props;
+    return (
+      <Container>
+        <Title>
+          <Text>This is the home screen</Text>
+        </Title>
+        <Button style={styles.button} onPress={() => navigation.navigate(SettingScreenType)}>
+          <Text>Click Me!</Text>
+        </Button>
+      </Container>
+    );
+  }
+}
 
 export default HomeScreen;
