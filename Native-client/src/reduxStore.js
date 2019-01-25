@@ -1,23 +1,14 @@
 import {
-  applyMiddleware, compose, createStore, combineReducers,
+  applyMiddleware, compose, createStore,
 } from 'redux';
 import thunk from 'redux-thunk';
-import personReducer from './reducers/person-reducer';
-
-const allReducers = combineReducers({
-  personList: personReducer,
-});
+import allReducers from './reducers/combineReducer';
 
 const allStoreEnhancers = compose(
   applyMiddleware(thunk),
 );
 
 
-const store = createStore(allReducers, {
-  personList: [{
-    name: 'Pavel',
-    age: '41',
-  }],
-}, allStoreEnhancers);
+const store = createStore(allReducers, allStoreEnhancers);
 
 export default store;

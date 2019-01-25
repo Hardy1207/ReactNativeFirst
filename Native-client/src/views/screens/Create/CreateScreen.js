@@ -5,13 +5,11 @@ import React from 'react';
 import {
   Container, Text, Button, Input, Form, Item, View,
 } from 'native-base';
-import { connect } from 'react-redux';
 import styles from './style';
-import { createNewPerson } from '../../../actions/person-actions';
 
 class CreateScreen extends React.PureComponent {
   CreateNewPerson = () => {
-    this.props.onCreateNewPerson({
+    this.props.navigation.state.params.createPerson({
       name: 'TestCreate',
       age: '2019',
     });
@@ -46,12 +44,4 @@ class CreateScreen extends React.PureComponent {
 }
 
 
-const mapActionsToProps = {
-  onCreateNewPerson: createNewPerson,
-};
-
-const mapStateToProps = state => ({
-  personList: state.personList,
-});
-
-export default connect(mapStateToProps, mapActionsToProps)(CreateScreen);
+export default CreateScreen;

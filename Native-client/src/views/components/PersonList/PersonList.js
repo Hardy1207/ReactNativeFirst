@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import { connect } from 'react-redux';
 import {
   FlatList, TouchableHighlight,
 } from 'react-native';
@@ -10,7 +9,6 @@ import {
   Container, Text, View,
 } from 'native-base';
 import styles from './style';
-import { getPersonList, createNewPerson } from '../../../actions/person-actions';
 import { EditScreenType } from '../../screens/screenTypes';
 
 
@@ -47,13 +45,5 @@ const PersonList = class extends React.Component {
   }
 };
 
-const mapActionsToProps = {
-  onGetPersonList: getPersonList,
-  onCreateNewPerson: createNewPerson,
-};
 
-const mapStateToProps = state => ({
-  personList: state.personList,
-});
-
-export default connect(mapStateToProps, mapActionsToProps)(PersonList);
+export default PersonList;
