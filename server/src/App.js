@@ -3,10 +3,10 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import * as config from './config/config.json'
 import userModel from './modules/user/userModel';
+import userValidator from './validators/users'
+import { validationResult } from 'express-validator/check';
 import { USERS_GET, USERS_CREATE, USERS_DELETE, USERS_UPDATE } from './constants/endpoints'
   
-
-// mongoose.connect("mongodb://localhost:27017/TaskDB", { useNewUrlParser: true });
 mongoose.connect(config.DB.DB_HOST, config.DB.DB_CONFIG);
 
 var conn = mongoose.connection;
@@ -28,22 +28,23 @@ app.get(USERS_GET, function (req, res) {
         })
 });
 
-app.post(USERS_CREATE, function (req, res) {
+app.post(USERS_CREATE, userValidator , function (req, res) {
    const createUser = new User(
         {
         name: req.body.name,
         age: req.body.age
         }
     );
-    createUser.save(function(err, newUser){      
-    if(err) return console.log(err);
-    else {
-        console.log(newUser._id);
-        console.log("good work");
-        res.json(newUser);
+    var errors = validationResult(req);
+ 
+    if (!errors.isEmpty()) {
+        res.status(400).json(errors.array());
+    } else {
+      createUser.save(function(err, newUser){  
+          res.status(200).json(newUser._id);
+        }
+      )
     }
-    }); 
-   
 });
 
 app.delete(USERS_DELETE, function (req, res) {
@@ -60,17 +61,21 @@ app.delete(USERS_DELETE, function (req, res) {
     res.json(req.body);
  });
 
- app.patch(USERS_UPDATE, function (req, res) {
+ app.patch(USERS_UPDATE, userValidator, function (req, res) {
         var obj = req.body;
         var id = obj._id;
         console.log(id);
-        if (id) {
-        User.update({_id: id}, obj, {upsert: true}, function (err,doc) {
+        var errors = validationResult(req);
+ 
+        if (!errors.isEmpty()) {
+            res.status(400).json(errors.array());
+        } else {
+          User.update({_id: id}, obj, {upsert: true}, function (err,doc) {
             if(err) return handleError(err);
             else
             {
                 console.log(doc);
-                res.json(doc);
+                res.status(200).json(doc);
             }
             })    
         }}

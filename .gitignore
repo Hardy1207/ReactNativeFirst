@@ -32,12 +32,16 @@ local.properties
 
 # node.js
 #
-node_modules/
+Native-client/node_modules/
+server/node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
 .vscode
+#config
 
+server/src/config
+server/src/constants
 
 # BUCK
 buck-out/
