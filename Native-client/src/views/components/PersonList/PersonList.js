@@ -20,14 +20,17 @@ const PersonList = class extends React.Component {
   checkIndexIsEven = index => index % 2 === 0;
 
   renderPersonList = item => (
-    <TouchableHighlight onPress={() => this.props.navigation.navigate(EditScreenType)}>
-      <View
-        style={styles.personListItem(this.checkIndexIsEven(item.index))}
-      >
-        <Text>{item.item.name}</Text>
-        <Text>{item.item.age}</Text>
-      </View>
-    </TouchableHighlight>
+    (item && item.index) !== undefined
+      && (
+      <TouchableHighlight onPress={() => this.props.navigation.navigate(EditScreenType)}>
+        <View
+          style={styles.personListItem(this.checkIndexIsEven(item.index))}
+        >
+          <Text>{item.item.name}</Text>
+          <Text>{item.item.age}</Text>
+        </View>
+      </TouchableHighlight>
+      )
   )
 
   render() {
