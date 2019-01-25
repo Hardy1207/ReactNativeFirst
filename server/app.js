@@ -54,6 +54,7 @@ app.post('/api/users/create', function (req, res) {
     if(err) return console.log(err);
     else {
         console.log(newUser._id);
+        console.log("good work");
         res.json(newUser);
     }
     }); 

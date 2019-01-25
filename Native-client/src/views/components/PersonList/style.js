@@ -9,9 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: isEvenIndex ? '#FFFAF0' : '#F5F5F5',
     padding: '5%',
   }),
-  buttonAddNewPerson: {
-    justifyContent: 'flex-end',
-  },
 });
 
 export default styles;

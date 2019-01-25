@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -9,7 +7,7 @@ import {
   FlatList, TouchableHighlight,
 } from 'react-native';
 import {
-  Container, Button, Text, Header, View,
+  Container, Text, View,
 } from 'native-base';
 import styles from './style';
 import { getPersonList, createNewPerson } from '../../../actions/person-actions';
@@ -17,19 +15,8 @@ import { EditScreenType } from '../../screens/screenTypes';
 
 
 const PersonList = class extends React.Component {
-  mapActionsToProps = {
-    onGetPersonList: getPersonList,
-    onCreateNewPerson: createNewPerson,
-  };
-
   componentDidMount() {
     this.props.onGetPersonList();
-  }
-
-  addNewPerson = (e) => {
-    e.preventDefault();
-    /*  e.preventDefault();
-    this.props.createNewPerson(); */
   }
 
   checkIndexIsEven = index => index % 2 === 0;
@@ -48,13 +35,6 @@ const PersonList = class extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Button style={styles.buttonAddNewPerson} onPress={this.addNewPerson}>
-            <Text>
-              Add New Person
-            </Text>
-          </Button>
-        </Header>
         <FlatList
           style={styles.personFlatList}
           // eslint-disable-next-line no-underscore-dangle
