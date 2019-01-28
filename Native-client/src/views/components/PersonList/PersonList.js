@@ -61,7 +61,7 @@ const PersonList = class extends React.Component {
       <Container>
         {
         this.state.error ? (
-          <ErrorMessage message={this.state.error} onRetry={() => this.props.onGetPersonList()} />
+          <ErrorMessage message={this.state.error} onRetry={() => this.getPersonList()} />
         ) : (
           <FlatList
             style={styles.personFlatList}
@@ -72,6 +72,11 @@ const PersonList = class extends React.Component {
           />
         )
       }
+        <Button onPress={this.getPersonList}>
+          <Text>
+            On Retry
+          </Text>
+        </Button>
       </Container>
     );
   }

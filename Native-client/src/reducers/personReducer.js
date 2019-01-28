@@ -1,4 +1,4 @@
-import { GET_PERSON_LIST } from '../actions/actionTypes';
+import { GET_PERSON_LIST_SUCCESS, PERSON_LOADING } from '../actions/actionTypes';
 
 
 export default function personReducer(state = {
@@ -7,11 +7,14 @@ export default function personReducer(state = {
     name: 'Pavel',
     age: '41',
   }],
+  isLoading: false,
 }, { type, payload }) {
   switch (type) {
-    case GET_PERSON_LIST: {
-      return payload.personList;
+    case GET_PERSON_LIST_SUCCESS: {
+      return payload;
     }
+    case PERSON_LOADING:
+      return payload.isLoading;
     default:
       return state;
   }

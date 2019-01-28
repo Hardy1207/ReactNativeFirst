@@ -38,10 +38,6 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .vscode
-#config
-
-server/src/config
-server/src/constants
 
 # BUCK
 buck-out/

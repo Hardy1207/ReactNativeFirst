@@ -8,6 +8,7 @@ export async function getPerson() {
     console.log(response);
     return response;
   } catch (err) {
+    console.log('error here ==========');
     throw new Error();
   }
 }

@@ -7,7 +7,7 @@ import {
 } from 'native-base';
 import { connect } from 'react-redux';
 import PersonList from '../../components/personList/PersonList';
-import { HomeScreenType, CreateScreenType } from '../screenTypes';
+import { CreateScreenType } from '../screenTypes';
 import { getPersonList, createNewPerson } from '../../../actions/personActions';
 import styles from './style';
 
@@ -32,16 +32,10 @@ class SettingScreen extends React.PureComponent {
         </Header>
         <PersonList
           navigation={navigation}
-          personList={this.props.person}
-          message={this.props.person}
+          personList={this.props.person.personList}
+          isLoading={this.props.person.isLoading}
           onGetPersonList={this.props.onGetPersonList}
         />
-        <Text>This is the Settings screen</Text>
-        <Button onPress={() => navigation.navigate(HomeScreenType)}>
-          <Text>
-            Click
-          </Text>
-        </Button>
       </Container>
     );
   }
