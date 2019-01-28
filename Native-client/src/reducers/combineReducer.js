@@ -4,7 +4,7 @@ import {
 import personReducer from './personReducer';
 
 const allReducers = combineReducers({
-  personList: personReducer,
+  person: personReducer,
 });
 
 export default allReducers;

@@ -9,8 +9,12 @@ export const uploadPersonList = newPersonList => ({
 });
 
 export const getPersonList = () => async (dispatch) => {
-  const response = await getPerson();
-  dispatch(uploadPersonList(response.data));
+  try {
+    const response = await getPerson();
+    dispatch(uploadPersonList(response.data));
+  } catch (err) {
+    throw new Error('Check network connection');
+  }
 };
 
 export const createNewPerson = newPerson => async (dispatch) => {

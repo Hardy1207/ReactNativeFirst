@@ -1,9 +1,15 @@
+/* eslint-disable no-console */
 import { httpGet, httpPost, httpDelete } from '../../requestApi';
 import { USERS_GET, USERS_CREATE, USERS_DELETE } from './requestTypes';
 
 export async function getPerson() {
-  const response = await httpGet(USERS_GET);
-  return response;
+  try {
+    const response = await httpGet(USERS_GET);
+    console.log(response);
+    return response;
+  } catch (err) {
+    throw new Error();
+  }
 }
 
 export async function createPerson(person) {

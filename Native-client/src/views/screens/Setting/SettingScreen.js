@@ -14,6 +14,8 @@ import styles from './style';
 
 class SettingScreen extends React.PureComponent {
   render() {
+    // eslint-disable-next-line no-console
+    console.log(this.props.person);
     const { navigation } = this.props;
     return (
       <Container>
@@ -30,7 +32,8 @@ class SettingScreen extends React.PureComponent {
         </Header>
         <PersonList
           navigation={navigation}
-          personList={this.props.personList}
+          personList={this.props.person}
+          message={this.props.person}
           onGetPersonList={this.props.onGetPersonList}
         />
         <Text>This is the Settings screen</Text>
@@ -50,7 +53,7 @@ const mapActionsToProps = {
 };
 
 const mapStateToProps = state => ({
-  personList: state.personList,
+  person: state.person,
 });
 
 export default connect(mapStateToProps, mapActionsToProps)(SettingScreen);
