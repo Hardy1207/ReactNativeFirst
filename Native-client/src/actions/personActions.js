@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { getPerson, createPerson } from '../core/modules/person/personApi';
 import { GET_PERSON_LIST_SUCCESS, PERSON_LOADING } from './actionTypes';
 

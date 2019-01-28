@@ -14,7 +14,7 @@ export default function personReducer(state = {
       return payload;
     }
     case PERSON_LOADING:
-      return payload.isLoading;
+      return payload;
     default:
       return state;
   }

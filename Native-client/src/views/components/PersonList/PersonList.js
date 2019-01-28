@@ -16,31 +16,6 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 
 const PersonList = class extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: '',
-    };
-  }
-
-  componentDidMount() {
-    this.getPersonList();
-  }
-
-  getPersonList = async () => {
-    try {
-      await this.props.onGetPersonList();
-      this.setState({
-        error: '',
-      });
-    } catch (err) {
-      console.log(err);
-      this.setState({
-        error: err.message,
-      });
-    }
-  }
-
   checkIndexIsEven = index => index % 2 === 0;
 
   renderPersonList = item => (
@@ -56,12 +31,12 @@ const PersonList = class extends React.Component {
 
   render() {
     console.log(this.props.personList);
-    console.log(this.state.error);
+    console.log(this.props.error);
     return (
       <Container>
         {
-        this.state.error ? (
-          <ErrorMessage message={this.state.error} onRetry={() => this.getPersonList()} />
+        this.props.error ? (
+          <ErrorMessage message={this.props.error} onRetry={this.props.getPersonList} />
         ) : (
           <FlatList
             style={styles.personFlatList}
@@ -72,7 +47,7 @@ const PersonList = class extends React.Component {
           />
         )
       }
-        <Button onPress={this.getPersonList}>
+        <Button onPress={this.props.getPersonList}>
           <Text>
             On Retry
           </Text>

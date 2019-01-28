@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignContent: 'flex-end',
   },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
 });
 
 export default styles;
