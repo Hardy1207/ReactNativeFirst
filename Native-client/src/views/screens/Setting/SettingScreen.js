@@ -1,6 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
   Container, Button, Text, Header, Spinner,
@@ -22,8 +19,6 @@ class SettingScreen extends React.PureComponent {
 
   componentDidMount() {
     this.getPersonList();
-    // eslint-disable-next-line no-console
-    console.log(this.state.error);
   }
 
   getPersonList = async () => {
@@ -33,27 +28,26 @@ class SettingScreen extends React.PureComponent {
         error: '',
       });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
       this.setState({
         error: err.message,
       });
     }
   }
 
+  goToCreateScreen = () => {
+    const { navigation } = this.props;
+    navigation.navigate(CreateScreenType,
+      { createPerson: this.props.onCreateNewPerson });
+  }
+
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.props.person);
-    // eslint-disable-next-line no-console
-    console.log(this.state.error);
     const { navigation } = this.props;
     return (
       <Container>
         <Header style={styles.header}>
           <Button
             style={styles.buttonAddNewPerson}
-            onPress={() => navigation.navigate(CreateScreenType,
-              { createPerson: this.props.onCreateNewPerson })}
+            onPress={this.goToCreateScreen}
           >
             <Text>
               Add New Person

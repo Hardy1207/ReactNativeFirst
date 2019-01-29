@@ -52,13 +52,12 @@ app.delete(USERS_DELETE, function (req, res) {
     console.log(req.params.id);
     User.deleteOne({ _id: req.params.id }, function(err) {
         if (!err) {
-            console.log("good work Pasha");
+            res.json(req.body);
         }
         else {
-            console.log("error");
+            res.status(400).json(err)
         }
     });
-    res.json(req.body);
  });
 
  app.patch(USERS_UPDATE, userValidator, function (req, res) {
@@ -71,7 +70,7 @@ app.delete(USERS_DELETE, function (req, res) {
             res.status(400).json(errors.array());
         } else {
           User.update({_id: id}, obj, {upsert: true}, function (err,doc) {
-            if(err) return handleError(err);
+            if(err) res.status(400).json(err);
             else
             {
                 console.log(doc);

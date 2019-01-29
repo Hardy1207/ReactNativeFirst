@@ -1,33 +1,39 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-console */
 import React from 'react';
 import {
+  // eslint-disable-next-line no-unused-vars
   Container, Text, Button, Input, Form, Item, View,
 } from 'native-base';
+import { Alert } from 'react-native';
 import styles from './style';
+import CreateForm from '../../components/createForm/CreateForm';
 
 class CreateScreen extends React.PureComponent {
-  CreateNewPerson = () => {
-    this.props.navigation.state.params.createPerson({
-      name: 'TestCreate',
-      age: '2019',
-    });
+  createNewPerson = async () => {
+    try {
+      await this.props.navigation.state.params.createPerson({
+        name: 'TestCreate',
+        age: '20',
+      });
+    } catch (err) {
+      this.showAlert(err.message);
+    }
+  }
+
+  showAlert = (alertMessage) => {
+    Alert.alert(
+      'Error',
+      alertMessage,
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    );
   }
 
   render() {
     return (
       <Container style={styles.container}>
-        <Form>
-          <Item>
-            <Input placeholder="Name" />
-          </Item>
-          <Item last>
-            <Input placeholder="Age" />
-          </Item>
-        </Form>
+        <CreateForm />
         <View style={styles.button_group}>
-          <Button info style={styles.accept_button} onPress={this.CreateNewPerson}>
+          <Button info style={styles.accept_button} onPress={this.createNewPerson}>
             <Text style={styles.button_text}>
             Create
             </Text>

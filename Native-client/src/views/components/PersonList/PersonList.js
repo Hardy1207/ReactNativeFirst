@@ -1,37 +1,36 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import {
   FlatList, TouchableHighlight,
 } from 'react-native';
 import {
-  Container, Text, View, Button,
+  Container, Text, View,
 } from 'native-base';
 import _ from 'lodash';
 import styles from './style';
 import { EditScreenType } from '../../screens/screenTypes';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import { DEFAULT_NAME, DEFAULT_AGE } from './defaultValues';
 
 
 const PersonList = class extends React.Component {
+  goToEditScreen = () => {
+    this.props.navigation.navigate(EditScreenType);
+  }
+
   checkIndexIsEven = index => index % 2 === 0;
 
   renderPersonList = item => (
-    <TouchableHighlight onPress={() => this.props.navigation.navigate(EditScreenType)}>
+    <TouchableHighlight onPress={this.goToEditScreen}>
       <View
         style={styles.personListItem(this.checkIndexIsEven(item.index))}
       >
-        <Text>{_.get(item.item, 'name', 'Pasha') || 'Pasha'}</Text>
-        <Text>{_.get(item.item, 'age', '20') || '20'}</Text>
+        <Text>{_.get(item.item, 'name', DEFAULT_NAME) || DEFAULT_NAME}</Text>
+        <Text>{_.get(item.item, 'age', DEFAULT_AGE) || DEFAULT_AGE}</Text>
       </View>
     </TouchableHighlight>
   )
 
   render() {
-    console.log(_.filter(this.props.personList, 'name'));
     return (
       <Container>
         {
@@ -40,18 +39,12 @@ const PersonList = class extends React.Component {
         ) : (
           <FlatList
             style={styles.personFlatList}
-            // eslint-disable-next-line no-underscore-dangle
             keyExtractor={item => item._id}
             data={this.props.personList}
             renderItem={this.renderPersonList}
           />
         )
       }
-        <Button onPress={this.props.getPersonList}>
-          <Text>
-            On Retry
-          </Text>
-        </Button>
       </Container>
     );
   }

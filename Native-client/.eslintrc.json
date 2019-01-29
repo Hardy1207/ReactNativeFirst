@@ -4,6 +4,12 @@
         "browser": true,
         "es6": true 
     },
+    "rules": {
+      "react/jsx-filename-extension": false,
+      "react/prop-types": false,
+      "react/destructuring-assignment": false,
+      "no-underscore-dangle": 0  
+    },
     "parser": "babel-eslint", 
     "extends": "airbnb"
 }

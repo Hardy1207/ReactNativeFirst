@@ -1,6 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import {
   Container, Title, Text, Button,
@@ -10,14 +7,18 @@ import { SettingScreenType } from '../screenTypes';
 
 
 class HomeScreen extends React.PureComponent {
-  render() {
+  goToSettingScreen = () => {
     const { navigation } = this.props;
+    navigation.navigate(SettingScreenType);
+  }
+
+  render() {
     return (
       <Container>
         <Title>
           <Text>This is the home screen</Text>
         </Title>
-        <Button style={styles.button} onPress={() => navigation.navigate(SettingScreenType)}>
+        <Button style={styles.button} onPress={this.goToSettingScreen}>
           <Text>Click Me!</Text>
         </Button>
       </Container>

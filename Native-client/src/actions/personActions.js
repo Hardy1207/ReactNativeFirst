@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { getPerson, createPerson } from '../core/modules/person/personApi';
 import { GET_PERSON_LIST_SUCCESS, PERSON_LOADING } from './actionTypes';
 
@@ -28,6 +27,10 @@ export const getPersonList = () => async (dispatch) => {
 };
 
 export const createNewPerson = newPerson => async (dispatch) => {
-  await createPerson(newPerson);
-  dispatch(getPersonList);
+  try {
+    await createPerson(newPerson);
+    dispatch(getPersonList);
+  } catch (err) {
+    throw new Error('Check network connection');
+  }
 };

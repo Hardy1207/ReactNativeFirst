@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#A9A9A9',
     textAlign: 'center',
     justifyContent: 'center',
-
   },
   button_text: {
     fontWeight: 'bold',
