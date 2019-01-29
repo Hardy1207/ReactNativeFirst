@@ -28,10 +28,15 @@ class CreateScreen extends React.PureComponent {
     );
   }
 
+  handleSubmit = (values) => {
+    console.log('here');
+    console.log(values);
+  }
+
   render() {
     return (
       <Container style={styles.container}>
-        <CreateForm />
+        <CreateForm handleSubmit={this.handleSubmit} />
         <View style={styles.button_group}>
           <Button info style={styles.accept_button} onPress={this.createNewPerson}>
             <Text style={styles.button_text}>
