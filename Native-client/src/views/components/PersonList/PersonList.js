@@ -10,6 +10,7 @@ import {
 import {
   Container, Text, View, Button,
 } from 'native-base';
+import _ from 'lodash';
 import styles from './style';
 import { EditScreenType } from '../../screens/screenTypes';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -23,24 +24,23 @@ const PersonList = class extends React.Component {
       <View
         style={styles.personListItem(this.checkIndexIsEven(item.index))}
       >
-        <Text>{item.item.name}</Text>
-        <Text>{item.item.age}</Text>
+        <Text>{_.get(item.item, 'name', 'Pasha') || 'Pasha'}</Text>
+        <Text>{_.get(item.item, 'age', '20') || '20'}</Text>
       </View>
     </TouchableHighlight>
   )
 
   render() {
-    console.log(this.props.personList);
-    console.log(this.props.error);
+    console.log(_.filter(this.props.personList, 'name'));
     return (
       <Container>
         {
-        this.props.error ? (
+        (this.props.error) ? (
           <ErrorMessage message={this.props.error} onRetry={this.props.getPersonList} />
         ) : (
           <FlatList
             style={styles.personFlatList}
-        // eslint-disable-next-line no-underscore-dangle
+            // eslint-disable-next-line no-underscore-dangle
             keyExtractor={item => item._id}
             data={this.props.personList}
             renderItem={this.renderPersonList}
